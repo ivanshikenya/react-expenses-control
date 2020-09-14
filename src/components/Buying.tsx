@@ -37,4 +37,4 @@ export const Buying = ({buying}: BuyingProps) => {
             <Button size="small">Edit</Button>
         </CardActions>
     </Card>;
-}
+};
