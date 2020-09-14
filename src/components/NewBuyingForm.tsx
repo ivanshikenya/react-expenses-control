@@ -70,6 +70,7 @@ export const NewBuyingForm = ({formHandler}: NewBuyingFormProps) => {
                 value={name}
                 label="Название товара"
                 onChange={event => setName(event.target.value)}
+                inputProps={{className: "buying-name"}}
             />
             <TextField
                 value={cost}
@@ -78,6 +79,7 @@ export const NewBuyingForm = ({formHandler}: NewBuyingFormProps) => {
                 InputProps={{
                     inputComponent: NumberFormatCustom as any,
                 }}
+                inputProps={{className: "buying-cost"}}
             />
             <Button variant="contained" color="primary" onClick={handleSaveButton}>
                 Сохранить
