@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import {BuyingsList} from "./components/BuyingsList";
+import {NewBuyingForm} from "./components/NewBuyingForm";
+import {IBuying} from "./components/Buying";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [buyings, setBuyings] = useState<IBuying[]>([]);
+
+    function formHandler(newBuying: IBuying) {
+        setBuyings([...buyings, newBuying]);
+    }
+
+    return (
+        <Container maxWidth="sm">
+            <Typography variant="h2" gutterBottom>
+                Список покупок
+            </Typography>
+            <BuyingsList buyings={buyings}/>
+            <NewBuyingForm formHandler={formHandler}/>
+        </Container>
+    );
 }
 
 export default App;
