@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import NumberFormat from 'react-number-format';
 import TextField from '@material-ui/core/TextField';
@@ -29,7 +29,7 @@ function NumberFormatCustom(props) {
     );
 }
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
     form: {
         '& > *': {
             margin: theme.spacing(1),
@@ -38,56 +38,46 @@ const styles = theme => ({
     root: {
         margin: theme.spacing(2),
     },
-});
+}));
 
-class NewBuyingFormUnwrapped extends React.Component {
+export const NewBuyingForm= ({formHandler}) => {
+    const[name, setName] = useState('');
+    const[cost, setCost] = useState(0);
+    const classes = useStyles();
 
-    state = {
-        name: '',
-        cost: ''
+    function handleSaveButton(){
+        formHandler({
+            name: name,
+            cost: cost
+        });
+        setName('');
+        setCost(0)
     };
-
-    handleSaveButton = () => {
-        this.props.formHandler({
-            name: this.state.name,
-            cost: this.state.cost
-        });
-        this.setState({
-            name: '',
-            cost: ''
-        });
-    }
-
-    render() {
-        const { classes } = this.props;
 
         return <Card className={classes.root}><CardContent>
             <form className={classes.form} noValidate autoComplete="off">
                 <TextField
-                    value={this.state.name}
+                    value={name}
                     label="Название товара"
-                    onChange={event => this.setState({name: event.target.value})}
+                    onChange={event => setName(event.target.value)}
                     inputProps={{ className: "buying-name" }}
                 />
                 <TextField
-                    value={this.state.cost}
+                    value={cost}
                     label="Цена"
-                    onChange={event => this.setState({cost: event.target.value})}
+                    onChange={event => setCost(Number(event.target.value))}
                     InputProps={{
                         inputComponent: NumberFormatCustom,
                     }}
                     inputProps={{ className: "buying-cost" }}
                 />
-                <Button variant="contained" color="primary" onClick={this.handleSaveButton}>
+                <Button variant="contained" color="primary" onClick={handleSaveButton}>
                     Сохранить
                 </Button>
             </form>
         </CardContent></Card>;
     }
-}
 
-NewBuyingFormUnwrapped.propTypes = {
+NewBuyingForm.propTypes = {
     formHandler: PropTypes.func.isRequired,
 };
-
-export const NewBuyingForm = withStyles(styles)(NewBuyingFormUnwrapped);
