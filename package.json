@@ -17,7 +17,7 @@
     "react-number-format": "^4.4.1",
     "react-scripts": "3.4.3",
     "react-text-mask": "^5.4.3",
-    "typescript": "~3.7.2"
+    "typescript": "~3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
