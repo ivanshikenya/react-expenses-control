@@ -19,12 +19,17 @@ function App() {
         setBuyings([...buyings])
     }
 
+    function editHandler(index: number, newElement: IBuying){
+        buyings[index] = newElement
+        setBuyings([...buyings])
+    }
+
     return (
         <Container maxWidth="sm">
             <Typography variant="h2" gutterBottom>
                 Список покупок
             </Typography>
-            <BuyingsList buyings={buyings} deleteHandler={deleteHandler}/>
+            <BuyingsList buyings={buyings} deleteHandler={deleteHandler} editHandler={editHandler}/>
             <NewBuyingForm formHandler={formHandler}/>
         </Container>
     );

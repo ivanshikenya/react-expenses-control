@@ -14,7 +14,8 @@ export interface IBuying {
 type BuyingProps = {
     buying: IBuying;
     index: number;
-    deleteHandler: Function
+    deleteHandler: Function;
+    editHandler: Function;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Buying = ({buying, index, deleteHandler}: BuyingProps) => {
+export const Buying = ({buying, index, deleteHandler, editHandler}: BuyingProps) => {
     const classes = useStyles();
     return <Card className={classes.root}>
         <CardContent>
@@ -36,7 +37,7 @@ export const Buying = ({buying, index, deleteHandler}: BuyingProps) => {
         </CardContent>
         <CardActions>
             <Button size="small" onClick={() => deleteHandler(index)}>Delete</Button>
-            <Button size="small">Edit</Button>
+            <Button size="small" onClick={() => editHandler(index, {name: '', cost: ''})}>Edit</Button>
         </CardActions>
     </Card>;
 };

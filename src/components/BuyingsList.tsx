@@ -17,17 +17,18 @@ const useStyles = makeStyles((theme) => ({
 
 type BuyingsListProps = {
     buyings: IBuying[];
-    deleteHandler: Function
+    deleteHandler: Function;
+    editHandler: Function
 }
 
-export const BuyingsList = ({buyings, deleteHandler}: BuyingsListProps) => {
+export const BuyingsList = ({buyings, deleteHandler, editHandler}: BuyingsListProps) => {
     const classes = useStyles();
     const sum = buyings
         .map(buying => Number.parseFloat(buying.cost as any))
         .reduce((a, c) => a + c, 0);
 
     return <>
-        {buyings.map((buying, index) => <Buying buying={buying} index={index} deleteHandler={deleteHandler}/>)}
+        {buyings.map((buying, index) => <Buying buying={buying} index={index} deleteHandler={deleteHandler} editHandler={editHandler}/>)}
         <Card className={classes.root}>
             <CardContent>
                 <Typography variant="h5" component="h2" className={classes.sum}>
